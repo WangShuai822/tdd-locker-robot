@@ -10,6 +10,7 @@ import java.util.List;
 @Log
 public class Locker {
     int available;
+    int availableExtension;
     int capacity;
     int capacityExtension;
     List<Ticket> ticketList = new ArrayList<>();
@@ -22,25 +23,29 @@ public class Locker {
     public Locker(int capacity, int capacityExtension) {
         this.capacity = capacity;
         this.capacityExtension = capacityExtension;
-        this.available = capacity + capacityExtension;
+        this.available = capacity;
+        this.availableExtension = capacityExtension;
     }
 
     public Ticket save() {
         if (available > 0) {
-            Ticket ticket = new Ticket();
-            ticketList.add(ticket);
-            log.info("print ticket...... ");
-
-            if (capacity > 0) {
-                capacity--;
-            } else {
-                capacityExtension--;
-            }
+            Ticket ticket = generateTicket();
             available--;
+            return ticket;
+        } else if (availableExtension > 0) {
+            Ticket ticket = generateTicket();
+            availableExtension--;
             return ticket;
         } else {
             return null;
         }
+    }
+
+    private Ticket generateTicket() {
+        Ticket ticket = new Ticket();
+        ticketList.add(ticket);
+        log.info("print ticket...... ");
+        return ticket;
     }
 
     public boolean validTicket(Ticket ticket) {

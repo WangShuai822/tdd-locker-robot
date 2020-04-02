@@ -47,7 +47,7 @@ public class LockerTest {
     public void should_return_ticket_when_saving_given_locker_one_is_not_full() {
         Locker locker = new Locker(10, 10);
         locker.save();
-        assertEquals(9, locker.getCapacity());
+        assertEquals(9, locker.getAvailable());
     }
 
     @Test
@@ -55,7 +55,7 @@ public class LockerTest {
         Locker locker = new Locker(1, 10);
         locker.save();
         locker.save();
-        assertEquals(9, locker.getCapacityExtension());
+        assertEquals(9, locker.getAvailableExtension());
     }
 
     @Test
