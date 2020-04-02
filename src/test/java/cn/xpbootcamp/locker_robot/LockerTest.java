@@ -49,13 +49,13 @@ public class LockerTest {
         locker.save();
         assertEquals(9, locker.getCapacity());
     }
-//
-//    @Test
-//    public void should_return_ticket_of_locker_two_when_saving_given_locker_one_is_full_and_locker_two_not_full() {
-//        Locker lockerOne = new Locker("1", 1);
-//        lockerOne.save();
-//        Locker lockerTwo = new Locker("2", 10);
-//        assertEquals("2", lockerTwo.save().getLockerName());
-//    }
+
+    @Test
+    public void should_return_ticket_when_saving_given_capacity_is_full_and_capacityExtension_not_full() {
+        Locker locker = new Locker(1, 10);
+        locker.save();
+        locker.save();
+        assertEquals(9, locker.getCapacityExtension());
+    }
 
 }
