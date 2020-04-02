@@ -58,4 +58,12 @@ public class LockerTest {
         assertEquals(9, locker.getCapacityExtension());
     }
 
+    @Test
+    public void should_return_ticket_when_saving_given_capacity_is_full_and_capacityExtension_is_full() {
+        Locker locker = new Locker(1, 1);
+        locker.save();
+        locker.save();
+        assertNull(locker.save());
+    }
+
 }
