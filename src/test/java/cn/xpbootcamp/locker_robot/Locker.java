@@ -29,11 +29,11 @@ public class Locker {
 
     public Ticket save() {
         if (available > 0) {
-            Ticket ticket = generateTicket();
+            Ticket ticket = generateTicket("group-1");
             available--;
             return ticket;
         } else if (availableExtension > 0) {
-            Ticket ticket = generateTicket();
+            Ticket ticket = generateTicket("group-2");
             availableExtension--;
             return ticket;
         } else {
@@ -41,8 +41,8 @@ public class Locker {
         }
     }
 
-    private Ticket generateTicket() {
-        Ticket ticket = new Ticket();
+    private Ticket generateTicket(String groupName) {
+        Ticket ticket = new Ticket(groupName);
         ticketList.add(ticket);
         log.info("print ticket...... ");
         return ticket;
@@ -50,8 +50,12 @@ public class Locker {
 
     public boolean validTicket(Ticket ticket) {
         if (ticketList.contains(ticket)) {
-            available++;
             ticketList.remove(ticket);
+            if ("group-1".equals(ticket.groupName)) {
+                available++;
+            } else {
+                availableExtension++;
+            }
             return true;
         } else {
             return false;

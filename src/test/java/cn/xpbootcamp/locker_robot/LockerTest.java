@@ -66,4 +66,22 @@ public class LockerTest {
         assertNull(locker.save());
     }
 
+
+    @Test
+    public void should_return_true_when_fetching_given_ticket_of_capacity_is_valid() {
+        Locker locker = new Locker(10, 10);
+        Ticket ticket = locker.save();
+        assertTrue(locker.fetch(ticket));
+        assertEquals(10, locker.getAvailable());
+    }
+
+    @Test
+    public void should_return_true_when_fetching_given_ticket_of_capacityExtension_is_valid() {
+        Locker locker = new Locker(1, 10);
+        locker.save();
+        Ticket ticket = locker.save();
+        assertTrue(locker.fetch(ticket));
+        assertEquals(10, locker.getAvailableExtension());
+    }
+
 }
