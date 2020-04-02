@@ -44,9 +44,18 @@ public class LockerTest {
 
     // 多个locker
     @Test
-    public void should_return_ticket_of_locker_one_when_saving_given_locker_one_not_full() {
-        Locker locker = new Locker("1", 10);
-        assertEquals("1", locker.save().getLockerName());
+    public void should_return_ticket_when_saving_given_locker_one_is_not_full() {
+        Locker locker = new Locker(10, 10);
+        locker.save();
+        assertEquals(9, locker.getCapacity());
     }
+//
+//    @Test
+//    public void should_return_ticket_of_locker_two_when_saving_given_locker_one_is_full_and_locker_two_not_full() {
+//        Locker lockerOne = new Locker("1", 1);
+//        lockerOne.save();
+//        Locker lockerTwo = new Locker("2", 10);
+//        assertEquals("2", lockerTwo.save().getLockerName());
+//    }
 
 }

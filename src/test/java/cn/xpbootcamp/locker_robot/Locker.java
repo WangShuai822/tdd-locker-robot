@@ -9,9 +9,9 @@ import java.util.List;
 @Data
 @Log
 public class Locker {
-    String name;
     int available;
     int capacity;
+    int capacityExtension;
     List<Ticket> ticketList = new ArrayList<>();
 
     public Locker(int capacity) {
@@ -19,17 +19,23 @@ public class Locker {
         this.available = capacity;
     }
 
-    public Locker(String name, int capacity) {
-        this.name = name;
+    public Locker(int capacity, int capacityExtension) {
         this.capacity = capacity;
-        this.available = capacity;
+        this.capacityExtension = capacityExtension;
+        this.available = capacity + capacityExtension;
     }
 
     public Ticket save() {
-        if (available >= 1) {
-            Ticket ticket = new Ticket(name);
+        if (available > 0) {
+            Ticket ticket = new Ticket();
             ticketList.add(ticket);
             log.info("print ticket...... ");
+
+            if (capacity > 0) {
+                capacity--;
+            } else {
+                capacityExtension--;
+            }
             available--;
             return ticket;
         } else {
