@@ -42,4 +42,11 @@ public class LockerTest {
         assertFalse(locker.fetch(ticket));
     }
 
+    // 多个locker
+    @Test
+    public void should_return_ticket_of_locker_one_when_saving_given_locker_one_not_full() {
+        Locker locker = new Locker("1", 10);
+        assertEquals("1", locker.save().getLockerName());
+    }
+
 }

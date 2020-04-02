@@ -9,18 +9,25 @@ import java.util.List;
 @Data
 @Log
 public class Locker {
+    String name;
     int available;
     int capacity;
-    List ticketList = new ArrayList();
+    List<Ticket> ticketList = new ArrayList<>();
 
     public Locker(int capacity) {
         this.capacity = capacity;
         this.available = capacity;
     }
 
+    public Locker(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
+        this.available = capacity;
+    }
+
     public Ticket save() {
         if (available >= 1) {
-            Ticket ticket = new Ticket();
+            Ticket ticket = new Ticket(name);
             ticketList.add(ticket);
             log.info("print ticket...... ");
             available--;
