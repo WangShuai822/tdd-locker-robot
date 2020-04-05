@@ -1,5 +1,5 @@
 ### 存包
-- given 可用箱子为0（已满） ，when 存包， then 失败
+- given 可用箱子为0（已满），when 存包， then 失败
 - given 可用箱子大于0（未满），when 存包，then 获取到ticket
 
 ### 取包
