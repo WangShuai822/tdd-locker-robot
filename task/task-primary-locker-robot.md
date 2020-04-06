@@ -13,6 +13,6 @@
 
 
 ## 取包
-- given LockerRobot正常小票，when 取包， then 取包成功
-- given LockerRobot异常小票，when 取包，then 取包失败
-- given LockerRobot已使用的小票，when 取包，then 取包失败
+- given 正常小票，when 取包， then 取包成功
+- given 异常小票，when 取包，then 取包失败
+- given 已使用的小票，when 取包，then 取包失败
