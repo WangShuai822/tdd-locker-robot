@@ -20,4 +20,13 @@ public class LockerRobot {
         }
         return ticket;
     }
+
+    public boolean fetch(Ticket ticket) {
+        for (Locker locker : lockerList) {
+            if (locker.fetch(ticket)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
