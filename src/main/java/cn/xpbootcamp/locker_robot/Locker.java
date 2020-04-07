@@ -5,13 +5,14 @@ import lombok.extern.java.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @Log
 public class Locker {
     int available;
     int capacity;
-    List ticketList = new ArrayList();
+    List<Ticket> ticketList = new ArrayList<>();
 
     public Locker(int capacity) {
         this.capacity = capacity;
@@ -20,7 +21,7 @@ public class Locker {
 
     public Ticket save() {
         if (available >= 1) {
-            Ticket ticket = new Ticket();
+            Ticket ticket = new Ticket(UUID.randomUUID().toString());
             ticketList.add(ticket);
             log.info("print ticket...... ");
             available--;

@@ -76,7 +76,7 @@ public class RobotTest {
         lockerList.add(locker1);
         lockerList.add(locker2);
         LockerRobot lockerRobot = new LockerRobot(lockerList);
-//        lockerRobot.save();
+        lockerRobot.save();
 
         Ticket ticket = new Ticket();
         assertFalse(lockerRobot.fetch(ticket));
