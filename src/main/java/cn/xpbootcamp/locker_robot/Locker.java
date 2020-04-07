@@ -31,7 +31,7 @@ public class Locker {
     }
 
     public boolean validTicket(Ticket ticket) {
-        if (ticketList.contains(ticket)) {
+        if (ticket != null && ticketList.contains(ticket)) {
             available++;
             ticketList.remove(ticket);
             return true;

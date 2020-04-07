@@ -68,12 +68,19 @@ public class RobotTest {
         assertTrue(lockerRobot.fetch(ticket));
     }
 
-//    @Test
-//    public void should_return_false_when_fetching_given_ticket_is_not_valid() {
-//        Locker locker = new Locker(10);
-//        Ticket ticket = new Ticket();
-//        assertFalse(locker.fetch(ticket));
-//    }
+    @Test
+    public void should_return_false_when_fetching_given_ticket_is_not_valid() {
+        Locker locker1 = new Locker(1);
+        Locker locker2 = new Locker(1);
+        List<Locker> lockerList = new ArrayList<>();
+        lockerList.add(locker1);
+        lockerList.add(locker2);
+        LockerRobot lockerRobot = new LockerRobot(lockerList);
+//        lockerRobot.save();
+
+        Ticket ticket = new Ticket();
+        assertFalse(lockerRobot.fetch(ticket));
+    }
 //
 //    @Test
 //    public void should_return_false_when_fetching_given_ticket_is_used() {
