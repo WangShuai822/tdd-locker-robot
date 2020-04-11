@@ -16,9 +16,9 @@ public class RobotTest {
         List<Locker> lockerList = new ArrayList<>();
         lockerList.add(locker1);
         lockerList.add(locker2);
-        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockerList);
+        LockerRobot lockerRobot = new LockerRobot(lockerList);
 
-        Ticket ticket = smartLockerRobot.save();
+        Ticket ticket = lockerRobot.save();
         assertNotNull(ticket);
         assertEquals(0, locker1.available);
     }
@@ -30,28 +30,27 @@ public class RobotTest {
         List<Locker> lockerList = new ArrayList<>();
         lockerList.add(locker1);
         lockerList.add(locker2);
-        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockerList);
-        smartLockerRobot.save();
+        LockerRobot lockerRobot = new LockerRobot(lockerList);
+        lockerRobot.save();
         assertEquals(0, locker1.available); //locker1 is full
 
-        Ticket ticket = smartLockerRobot.save();
+        Ticket ticket = lockerRobot.save();
         assertNotNull(ticket);
         assertEquals(0, locker2.available);
     }
 
     @Test
-    public void should_return_false_when_saving_given_locker1_is_not_available_and_locker2_is_not_available() {
+    public void should_return_exception_when_saving_given_locker1_is_not_available_and_locker2_is_not_available() {
         Locker locker1 = new Locker(1);
         Locker locker2 = new Locker(1);
         List<Locker> lockerList = new ArrayList<>();
         lockerList.add(locker1);
         lockerList.add(locker2);
-        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockerList);
-        smartLockerRobot.save();
-        smartLockerRobot.save();
+        LockerRobot lockerRobot = new LockerRobot(lockerList);
+        lockerRobot.save();
+        lockerRobot.save();
 
-        Ticket ticket = smartLockerRobot.save();
-        assertNull(ticket);
+        assertThrows(LockerFullException.class, lockerRobot::save);
     }
 
 
@@ -62,10 +61,10 @@ public class RobotTest {
         List<Locker> lockerList = new ArrayList<>();
         lockerList.add(locker1);
         lockerList.add(locker2);
-        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockerList);
-        Ticket ticket = smartLockerRobot.save();
+        LockerRobot lockerRobot = new LockerRobot(lockerList);
+        Ticket ticket = lockerRobot.save();
 
-        assertTrue(smartLockerRobot.fetch(ticket));
+        assertTrue(lockerRobot.fetch(ticket));
     }
 
     @Test
@@ -75,25 +74,25 @@ public class RobotTest {
         List<Locker> lockerList = new ArrayList<>();
         lockerList.add(locker1);
         lockerList.add(locker2);
-        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockerList);
-        smartLockerRobot.save();
+        LockerRobot lockerRobot = new LockerRobot(lockerList);
+        lockerRobot.save();
 
         Ticket ticket = new Ticket();
-        assertFalse(smartLockerRobot.fetch(ticket));
+        assertThrows(InvalidTicketException.class, () -> lockerRobot.fetch(ticket));
     }
 
     @Test
-    public void should_return_false_when_fetching_given_ticket_is_used() {
+    public void should_return_exception_when_fetching_given_ticket_is_used() {
         Locker locker1 = new Locker(1);
         Locker locker2 = new Locker(1);
         List<Locker> lockerList = new ArrayList<>();
         lockerList.add(locker1);
         lockerList.add(locker2);
-        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockerList);
-        Ticket ticket = smartLockerRobot.save();
+        LockerRobot lockerRobot = new LockerRobot(lockerList);
+        Ticket ticket = lockerRobot.save();
 
-        smartLockerRobot.fetch(ticket);
-        assertFalse(smartLockerRobot.fetch(ticket));
+        lockerRobot.fetch(ticket);
+        assertThrows(InvalidTicketException.class, () -> lockerRobot.fetch(ticket));
     }
 
 
