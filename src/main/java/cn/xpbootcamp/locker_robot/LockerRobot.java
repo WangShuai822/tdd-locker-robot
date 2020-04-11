@@ -9,7 +9,6 @@ public class LockerRobot {
     }
 
     public Ticket save() {
-        Ticket ticket = new Ticket();
         if (lockerList.size() > 0) {
             int capacity = 0;
             Locker maxLocker = new Locker(0);
@@ -19,9 +18,9 @@ public class LockerRobot {
                     maxLocker = locker;
                 }
             }
-            ticket = maxLocker.save();
+            return maxLocker.save();
         }
-        return ticket;
+        return null;
     }
 
     public boolean fetch(Ticket ticket) {
