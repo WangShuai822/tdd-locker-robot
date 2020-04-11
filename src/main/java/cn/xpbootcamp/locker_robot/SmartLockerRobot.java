@@ -2,9 +2,10 @@ package cn.xpbootcamp.locker_robot;
 
 import java.util.List;
 
-public class LockerRobot {
+public class SmartLockerRobot extends Robot{
     List<Locker> lockerList;
-    public LockerRobot(List<Locker> lockerList) {
+    public SmartLockerRobot(List<Locker> lockerList) {
+        super(lockerList);
         this.lockerList = lockerList;
     }
 
@@ -24,12 +25,4 @@ public class LockerRobot {
         return maxLocker.save();
     }
 
-    public boolean fetch(Ticket ticket) {
-        for (Locker locker : lockerList) {
-            if (locker.fetch(ticket)) {
-                return true;
-            }
-        }
-        throw new InvalidTicketException();
-    }
 }

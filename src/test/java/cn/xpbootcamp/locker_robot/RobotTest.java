@@ -16,9 +16,9 @@ public class RobotTest {
         List<Locker> lockerList = new ArrayList<>();
         lockerList.add(locker1);
         lockerList.add(locker2);
-        LockerRobot lockerRobot = new LockerRobot(lockerList);
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockerList);
 
-        Ticket ticket = lockerRobot.save();
+        Ticket ticket = smartLockerRobot.save();
         assertNotNull(ticket);
         assertEquals(0, locker1.available);
     }
@@ -30,11 +30,11 @@ public class RobotTest {
         List<Locker> lockerList = new ArrayList<>();
         lockerList.add(locker1);
         lockerList.add(locker2);
-        LockerRobot lockerRobot = new LockerRobot(lockerList);
-        lockerRobot.save();
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockerList);
+        smartLockerRobot.save();
         assertEquals(0, locker1.available); //locker1 is full
 
-        Ticket ticket = lockerRobot.save();
+        Ticket ticket = smartLockerRobot.save();
         assertNotNull(ticket);
         assertEquals(0, locker2.available);
     }
@@ -46,11 +46,11 @@ public class RobotTest {
         List<Locker> lockerList = new ArrayList<>();
         lockerList.add(locker1);
         lockerList.add(locker2);
-        LockerRobot lockerRobot = new LockerRobot(lockerList);
-        lockerRobot.save();
-        lockerRobot.save();
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockerList);
+        smartLockerRobot.save();
+        smartLockerRobot.save();
 
-        Ticket ticket = lockerRobot.save();
+        Ticket ticket = smartLockerRobot.save();
         assertNull(ticket);
     }
 
@@ -62,10 +62,10 @@ public class RobotTest {
         List<Locker> lockerList = new ArrayList<>();
         lockerList.add(locker1);
         lockerList.add(locker2);
-        LockerRobot lockerRobot = new LockerRobot(lockerList);
-        Ticket ticket = lockerRobot.save();
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockerList);
+        Ticket ticket = smartLockerRobot.save();
 
-        assertTrue(lockerRobot.fetch(ticket));
+        assertTrue(smartLockerRobot.fetch(ticket));
     }
 
     @Test
@@ -75,11 +75,11 @@ public class RobotTest {
         List<Locker> lockerList = new ArrayList<>();
         lockerList.add(locker1);
         lockerList.add(locker2);
-        LockerRobot lockerRobot = new LockerRobot(lockerList);
-        lockerRobot.save();
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockerList);
+        smartLockerRobot.save();
 
         Ticket ticket = new Ticket();
-        assertFalse(lockerRobot.fetch(ticket));
+        assertFalse(smartLockerRobot.fetch(ticket));
     }
 
     @Test
@@ -89,11 +89,11 @@ public class RobotTest {
         List<Locker> lockerList = new ArrayList<>();
         lockerList.add(locker1);
         lockerList.add(locker2);
-        LockerRobot lockerRobot = new LockerRobot(lockerList);
-        Ticket ticket = lockerRobot.save();
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockerList);
+        Ticket ticket = smartLockerRobot.save();
 
-        lockerRobot.fetch(ticket);
-        assertFalse(lockerRobot.fetch(ticket));
+        smartLockerRobot.fetch(ticket);
+        assertFalse(smartLockerRobot.fetch(ticket));
     }
 
 
