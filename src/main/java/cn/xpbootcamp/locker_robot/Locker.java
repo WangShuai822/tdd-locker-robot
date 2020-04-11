@@ -19,7 +19,7 @@ public class Locker {
         this.available = capacity;
     }
 
-    public Ticket save() {
+    public Ticket save(){
         if (available >= 1) {
             Ticket ticket = new Ticket(UUID.randomUUID().toString());
             ticketList.add(ticket);
@@ -27,7 +27,7 @@ public class Locker {
             available--;
             return ticket;
         } else {
-            return null;
+            throw new LockerFullException();
         }
     }
 
@@ -37,7 +37,7 @@ public class Locker {
             ticketList.remove(ticket);
             return true;
         } else {
-            return false;
+            throw new InvalidTicketException();
         }
     }
 

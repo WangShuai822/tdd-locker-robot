@@ -9,18 +9,19 @@ public class LockerRobot {
     }
 
     public Ticket save() {
-        if (lockerList.size() > 0) {
-            int capacity = 0;
-            Locker maxLocker = new Locker(0);
-            for (Locker locker : lockerList) {
-                if (locker.capacity > capacity) {
-                    capacity = locker.capacity;
-                    maxLocker = locker;
-                }
-            }
-            return maxLocker.save();
+        if (lockerList.size() <= 0) {
+            throw new LockerFullException();
         }
-        return null;
+
+        int available = 0;
+        Locker maxLocker = new Locker(0);
+        for (Locker locker : lockerList) {
+            if (locker.available > available) {
+                available = locker.available;
+                maxLocker = locker;
+            }
+        }
+        return maxLocker.save();
     }
 
     public boolean fetch(Ticket ticket) {
@@ -29,6 +30,6 @@ public class LockerRobot {
                 return true;
             }
         }
-        return false;
+        throw new InvalidTicketException();
     }
 }
