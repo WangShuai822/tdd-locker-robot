@@ -12,7 +12,7 @@ public class LockerTest {
     public void should_return_ticket_when_saving_given_locker_is_not_available() {
         Locker locker = new Locker(1);
         locker.save();
-        assertNull(locker.save());
+        assertThrows(LockerFullException.class, locker::save);
     }
 
     @Test
@@ -28,18 +28,18 @@ public class LockerTest {
         assertTrue(locker.fetch(ticket));
     }
     @Test
-    public void should_return_false_when_fetching_given_ticket_is_not_valid() {
+    public void should_return_exception_when_fetching_given_ticket_is_not_valid() {
         Locker locker = new Locker(10);
         Ticket ticket = new Ticket();
-        assertFalse(locker.fetch(ticket));
+        assertThrows(InvalidTicketException.class, () -> locker.fetch(ticket));
     }
 
     @Test
-    public void should_return_false_when_fetching_given_ticket_is_used() {
+    public void should_return_exception_when_fetching_given_ticket_is_used() {
         Locker locker = new Locker(10);
         Ticket ticket = locker.save();
         locker.fetch(ticket);
-        assertFalse(locker.fetch(ticket));
+        assertThrows(InvalidTicketException.class, () -> locker.fetch(ticket));
     }
 
 }

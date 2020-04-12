@@ -10,17 +10,14 @@ public class LockerRobot extends Robot{
     }
 
     public Ticket save() {
-        if (lockerList.size() <= 0) {
-            throw new LockerFullException();
-        }
-        Ticket ticket = new Ticket();
-        for (Locker locker : lockerList) {
-            ticket = locker.save();
-            if (ticket != null) {
-                break;
+        if (lockerList.size() > 0) {
+            for (Locker locker : lockerList) {
+                if (locker.available > 0) {
+                    return locker.save();
+                }
             }
         }
-        return ticket;
+        throw new LockerFullException();
     }
 
 }
